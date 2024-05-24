@@ -11,10 +11,12 @@ is_online = True #in boolean, as Python is case-sensitive, we cannot write 'true
 name = input("What is your name? ")  #giving user input and variable always returns as a string
 print("Hello " + name)  #string concatenation
 
+
 #TYPE CONVERSION
 birth_year = input("Enter your birth year: ")
 age = 2020 - int(birth_year) #input variable above always returns as a string so need to convert
 print(age)
+
 
 #STRINGS
 #strings in python cannot be changed once created
@@ -24,6 +26,7 @@ print(name.lower())
 print(name.find('j'))
 print(name.replace('Rahman', '5'))
 print('Supti' in name) #checking with the in operator
+
 
 #ARITHMATIC OPERATORS
 print(10 / 3) #gets a float number 
@@ -41,6 +44,8 @@ print(price > 10 or price < 30) #returns true when one of both conditions is tru
 price = 5
 print(not price > 10) #reverses false to true or true to false
 
+
+
 #IF STATEMENTS
 temperature = 35
 if temperature > 30:
@@ -50,11 +55,15 @@ elif temperature > 20:
 else:
   print("It's cold")
 
+
+
 #WHILE LOOPS
 i = 1
 while i <= 5:
   print(i * '*')
   i = i + 1
+
+
 
 #LISTS
 names = ["Sanjida", "Rahman", "Supti", "Mun", "Fatema"]
@@ -62,6 +71,8 @@ print(names[-1]) #represents first element from the end of the list
 names[0] = "Sam"
 print(names)
 print(names[0:3]) #prints the first 3 names
+
+
 
 #LIST METHODS
 numbers = [1, 2, 3, 4, 5]
@@ -77,6 +88,8 @@ numbers = [1, 2, 3, 4, 5]
 print(1 in numbers)
 print(10 in numbers)
 print(len(numbers))
+
+
 
 #FOR LOOP
 numbers = [1, 2, 3, 4, 5]
@@ -107,6 +120,42 @@ print(numbers)
 for number in numbers:
   print(number)
 
+
+
 #TUPLES - cannot be changed once created
 numbers = (1, 2, 3)
 numbers.count(3)
+
+
+#EXCEPTIONS
+try:
+  age = int(input("Age: "))
+  income = 20000
+  risk = income / age
+  print(age)
+except ZeroDivisionError:
+  print("Age cannot be zero.")
+except ValueError:
+  print("Invelid value")
+
+
+#CLASSES
+class Point: 
+  def move(self):
+    print("move")
+  def draw(self):
+    print("draw")
+
+
+point1 = Point()
+point1.draw()
+
+
+
+
+
+
+
+
+
+
