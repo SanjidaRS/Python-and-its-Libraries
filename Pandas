@@ -1,0 +1,67 @@
+#CREATING SERIES
+import panda as pd
+pd.__version__
+s1=pd.Series()
+s1
+s2=pd.Series([1,2,3,4,5])
+s2
+s2.index
+s2.values
+s3=pd.Series([1,2,3,4,5], index=[10,20,30,40,50])
+s3
+scores = pd.Series([3.2, 4.5, 2.6, 3.8, 5], index=['Bob', 'George', 'Alex', 'Fiona', 'Sarah'])
+scores
+d = {'Bob':3.2, 'George':4.5, 'Alex':2.6, 'Fiona':5, 'Sarah':3.8}
+s4 = pd.Series(d)
+s4
+s4.index
+s4.values
+df1=pd.DataFrame()
+type(df1)
+print(df1)
+df1.columns
+df1.index
+students_list = [['Bob', 'Williams', 26, 'Computer Science', 86],
+                ['Emma', 'Johnson', 23, 'Math', 92],
+                ['Sarah', 'Smith', 22, 'Chemistry', 95],
+                ['Alex', 'Brown', 21, 'Biology', 82]]
+students_df = pd.DataFrame(students_list)
+students_df
+students_df = pd.DataFrame(students_list, columns=['First Name', 'Last Name', 'Age', 'Major', 'Score'],
+                          index=['bob@gmail.com', 'Emma@gmail.com', 'Sarah@gmail.com', 'Alex@gmail.com'])
+students_df
+students_dict={'First Name':['Bob', 'Emma', 'Sarah', 'Alex'],
+               'Last Name':['Wlliams', 'Johnson', 'Smith', 'Brown'],
+               'Age':[26,23,22,21],
+               'Major':['Computer Science', 'Math', 'Chemistry', 'Biology'],
+               'Score':[86,92,95,82],}
+students_df2 = pd.DataFrame(students_dict)
+students_df2
+students_df2 = pd.DataFrame(students_dict, columns=['Last Name', 'Score'])
+students_df2
+students_df.columns
+students_df.index
+students_df.shape
+students_df.head(2)
+students_df.info()
+students_df.describe()
+
+
+
+
+
+
+
+
+
+
+
+
+a = [1, 7, 2]
+myvar = pd.Series(a, index = ["x", "y", "z"])
+print(myvar)
+print(myvar[0])
+print(myvar["y"])
+calories = {"day1": 420, "day2": 380, "day3": 390}
+myvar = pd.Series(calories)
+print(myvar)
