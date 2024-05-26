@@ -121,7 +121,6 @@ for number in numbers:
   print(number)
 
 
-
 #TUPLES - cannot be changed once created
 numbers = (1, 2, 3)
 numbers.count(3)
@@ -148,11 +147,62 @@ class Point:
 
 
 point1 = Point()
+point1.x = 10
+point1.y = 20
+print(point1.x)
 point1.draw()
 
 
 
+#CONSTRUCTORS
+class Point: 
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
 
+  def move(self):
+    print("move")
+  def draw(self):
+    print("draw")
+
+point = Point(10, 20)
+print(point.x)
+
+#CONSTRUCTORS CHALLENGE
+class Person:
+  def __init__(self, name):
+    self.name = name
+  def talk(self):
+    print(f"Hi, I am {self.name}")
+
+john = Person("John Smith")
+john.talk()
+
+
+
+#INHERITANCE
+class Mammal:
+  def walk(self):
+    print("walk")
+
+
+class Dog(Mammal):
+ def bark(self):
+    print("bark")
+
+
+class Cat(Mammal):
+ def be_annoying(self):
+    print("annoying")
+
+cat1 = Cat()
+
+dog1 = Dog
+dog1.walk()
+
+
+
+#PACKAGES
 
 
 
