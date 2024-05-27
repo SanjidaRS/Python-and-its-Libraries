@@ -1,0 +1,232 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#SCATTERPLOT
+X_data = np.random.random(50) * 100
+y_data = np.random.random(50) * 100
+plt.scatter(X_data, y_data)
+plt.show()
+print(X_data)  #just for seeing the random data
+plt.scatter(X_data, y_data, c='red')  #c for colour
+plt.scatter(X_data, y_data, c='#000')
+plt.scatter(X_data, y_data, c='#000', marker='*')  #marker for shape
+plt.scatter(X_data, y_data, c='#000', marker='*', s=150)  #s for size
+plt.scatter(X_data, y_data, c='#000', marker='*', s=150, alpha=0.3)  #alpha for transparency
+
+#LINE PLOTS
+years = [2006 + x for x in range(16)]
+weights = [80, 83, 84, 85, 86, 82, 81, 79, 83, 80, 82, 82, 83, 81, 80, 79]
+print(len(years))
+print(len(weights))
+plt.plot(years, weights)
+plt.plot(years, weights, c='pink')
+plt.plot(years, weights, c='pink', lw=3)  # lw for visibility width 
+plt.plot(years, weights, c='pink', lw=3, linestyle='--')
+plt.plot(years, weights, 'r--')  #shortcut
+plt.show()
+
+
+
+#BARPLOTS
+x = ['C++', 'C#', 'Python', 'Java', 'PHP']
+y = [100, 33, 14, 5, 76]
+plt.bar(x, y)
+plt.bar(x, y, color='green', align='edge')  
+plt.bar(x, y, color='crimson')
+plt.bar(x, y, color='green', align='edge', width=0.5)
+plt.bar(x, y, color='green', align='edge', width=0.7, edgecolor='red')
+plt.bar(x, y, color='green', align='edge', width=0.7, edgecolor='red', lw=10)
+plt.show()
+
+
+#HISTOGRAMS
+ages = np.random.normal(20, 1.5, 1000)
+plt.hist(ages)
+plt.hist(ages, bins=20)
+plt.hist(ages, bins=[ages.min(), 18, 21, ages.max()])
+plt.hist(ages, bins=20, cumulative=True)
+plt.show()
+
+
+
+#PIECHARTS
+langs = ['Python', 'C++', 'Java', 'C#', 'Go']
+votes = [50, 24, 14, 6, 17]
+plt.pie(votes, labels=langs)
+explodes = [0.3, 0, 0, 0, 0]
+plt.pie(votes, labels=langs, explode=explodes)
+explodes = [0, 0, 0, 0.2, 0]
+plt.pie(votes, labels=langs, explode=explodes)
+explodes = [0, 0, 0, 0.2, 0]
+plt.pie(votes, labels=langs, explode=explodes, autopct='%.2f%%')
+plt.pie(votes, labels=langs, explode=explodes, autopct='%.2f%%', pctdistance=0.8)
+plt.pie(votes, labels=langs, explode=explodes, autopct='%.2f%%', pctdistance=0.8, startangle=90)
+plt.show()
+
+
+
+#BOXPLOTS
+height = np.random.normal(172, 8, 300)
+print(height)
+plt.boxplot(height)
+plt.show()
+first = np.linspace(0, 10, 25)
+second = np.linspace(10, 200, 25)
+third = np.linspace(200, 210, 25)
+fourth = np.linspace(210, 230, 25)
+data = np.concatenate((first, second, third, fourth))
+plt.boxplot(data)
+plt.show()
+
+
+
+#PLOT CUSTOMIZATION
+years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+income = [55, 56, 62, 61, 72, 72, 73, 75]
+income_ticks = list(range(50, 81, 2))
+plt.plot(years, income)
+plt.show()
+years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+income = [55, 56, 62, 61, 72, 72, 73, 75]
+income_ticks = list(range(50, 81, 2))
+plt.plot(years, income)
+plt.title("Income of John", fontsize=25, fontname="Calibri")
+plt.xlabel("Year")
+plt.ylabel("Yearly Income in USD")
+plt.yticks(income_ticks, [f"${x}k" for x in income_ticks])
+plt.show()
+
+
+
+#MULTIPLE PLOTS
+stock_a = [100, 102, 99, 101, 101, 100, 102]
+stock_b = [90, 95, 102, 104, 105, 103, 109]
+stock_c = [110, 115, 100, 105, 100, 98, 95]
+plt.plot(stock_a, label='Company1')
+plt.plot(stock_b, label='Company2')
+plt.plot(stock_c, label='Company3')
+plt.legend(loc="lower right")
+plt.show()
+
+votes = [10, 2, 5, 16, 22]
+people = ['A', 'B', 'C', 'D', 'E']
+plt.pie(votes, labels=None)
+plt.legend(labels=people)
+
+
+
+#PLOT STYLING
+import matplotlib.pyplot as plt
+from matplotlib import style
+style.use("dark_background")
+votes = [10, 2, 5, 16, 22]
+people = ['A', 'B', 'C', 'D', 'E']
+plt.pie(votes, labels=people)
+plt.show()
+
+
+#MULTIPLS FIGURES'
+x1, y1 = np.random.random(100), np.random.random(100)
+x2, y2 = np.arange(100), np.random.random(100)
+plt.figure(1)
+plt.scatter(x1, y1)
+plt.figure(2)
+plt.plot(x2, y2)
+plt.show()
+
+x = np.arange(100)
+fig, axs = plt.subplots(2, 2)
+axs[0, 0].plot(x, np.sin(x))
+axs[0, 0].set_title("Sine wave")
+axs[0, 1].plot(x, np.cos(x))
+axs[0, 1].set_title("Cosine wave")
+axs[1, 0].plot(x, np.random.random(100))
+axs[1, 0].set_title("Random Function")
+axs[1, 1].plot(x, np.log(x))
+axs[1, 1].set_title("Log Function")
+axs[1, 1].set_xlabel('TEST')
+fig.suptitle('Four plots')
+plt.show()
+
+
+#EXPORTING FIGURES
+plt.savefig('fourplots.png', dpi=300)
+plt.savefig('fourplots.png', dpi=300, transparent=False, bbox_inches='tight', pad_inches=20.2)
+
+
+#3D PLOTTING
+ax = plt.axes(projection='3d')
+x = np.random.random(100)
+y = np.random.random(100)
+z = np.random.random(100)
+ax.scatter(x, y, z)
+ax.set_title('3D PLOT')
+ax.set_xlabel('Test')
+plt.show()
+
+ax = plt.axes(projection='3d')
+x = np.arange(0, 50, 0.1)
+y = np.arange(0, 50, 0.1)
+z = np.cos(x + y)
+ax.plot(x, y, z)
+ax.set_title('3D PLOT')
+ax.set_xlabel('Test')
+plt.show()
+
+ax = plt.axes(projection='3d')
+x = np.arange(-5, 5, 0.1)
+y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) * np.cos(Y)
+ax.plot_surface(X, Y, Z)
+ax.set_title('3D PLOT')
+ax.set_xlabel('Test')
+plt.show()
+
+ax = plt.axes(projection='3d')
+x = np.arange(-5, 5, 0.1)
+y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) * np.cos(Y)
+ax.plot_surface(X, Y, Z, cmap='Spectral')
+ax.set_title('3D PLOT')
+ax.set_xlabel('Test')
+plt.show()
+
+ax = plt.axes(projection='3d')
+x = np.arange(-5, 5, 0.1)
+y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) * np.cos(Y)
+ax.plot_surface(X, Y, Z, cmap='Spectral')
+ax.set_title('3D PLOT')
+ax.set_xlabel('Test')
+ax.view_init(azim=0, elev=90)
+plt.show()
+
+
+
+
+#ANIMATING PLOTS 
+import random
+heads_tails = [0,0]
+for _ in range(100000):
+    heads_tails[random.randint(0, 1)] += 1
+    plt.bar(['Heads', 'Tails'], heads_tails, color=['red', 'blue'])
+    plt.pause(0.001)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
