@@ -21,6 +21,9 @@ type(df1)
 print(df1)
 df1.columns
 df1.index
+
+
+#PANDAS DATAFRAME
 students_list = [['Bob', 'Williams', 26, 'Computer Science', 86],
                 ['Emma', 'Johnson', 23, 'Math', 92],
                 ['Sarah', 'Smith', 22, 'Chemistry', 95],
@@ -47,8 +50,167 @@ students_df.info()
 students_df.describe()
 
 
+#READING DATA FROM A FILE
+import pandas as pd
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_01.csv')
+df
+df2 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_02.csv')
+df2
+
+#does not have header
+df2 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_02.csv', header=None, names=['fname', 'lname', 'course', 'score'])
+df2
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_01.csv', skiprows=1, names=['a','b','c','d'])
+df
+df3 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_03.csv')
+df3
+len(df3.columns)
+
+#when dataset surrounded by pipelines instead of commas
+df3 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_03.csv', sep='|'
+df3
+df4 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_04.csv')
+df4
+
+#first few lines contain sentences
+df4 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_04.csv', comment='#')
+
+#avoiding backslashe t character
+df4 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_04.csv', comment='#', sep='\t')
+df4
+
+#to fix this ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 4
+df5 = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/data_05.csv', skiprows=3)
+df5
 
 
+
+#SELECTION OPERATION IN PANDAS DATAFRAME
+#accessing one or multiple column using []
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/titanic.csv')
+df
+df.shape
+df.columns
+df.index
+ages = df['Age']
+ages
+type(ages) #pandas service (can perform several functions)
+ages.mean()
+ages.max()
+df[['Name','Age']]
+df.Age
+
+#query: select 1st, 2nd and 5th columns
+df.iloc[0,[1,4]]
+df
+df.loc[0,['Survived','Sex']]
+df.iloc[:5,:3]
+
+#query: select the 1st and last row and last 3 columns
+df.iloc[[0,-1],-3:]
+df.loc[5:10, 'Name':'Ticket']
+
+#query: select all male passengers
+df.Sex
+df.Sex=='male'
+df.loc[df.Sex=='male']
+
+#query: select all passengers who are over 35
+df.Sex=='female'
+df.Age>35
+df.loc[(df.Sex=='female')&(df.Age>35)]
+
+
+
+#MISSING VALUES AND DUPLICATES
+#Finding NaN values
+#removing rows or columns containing missing values
+#filling missing values
+#find and remove duplicates
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/titanic.csv')
+df
+df.isna()
+df.isna().any()
+df.dropna()
+df2 = df.dropna(axis=0)
+df2
+df2.isna().any()
+print(df.shape,df2.shape)
+df.dropna(inplace=True)
+df.shape
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/titanic.csv')
+df2 = df.fillna(0)
+df2
+df2.isna().any()
+df3 = df.fillna(df.mean(numeric_only=True))
+df3
+df4 = df3.fillna(df.mode().iloc[0])
+df4
+df4.isna().any()
+df.duplicated()
+df.duplicated().any()
+
+
+
+#STRUCTURAL MANIPULATION IN PANDAS DATAFRAME
+#rename columns in a data frame
+#add a new column to the data frame
+#add a new row or concatenate 2 data frames
+#remove columns and rows using drop method
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/employees.csv')
+df
+df.shape
+df.head()
+df.columns
+df.Gender
+df.rename({'First Name':'First_Name', 'Start Date':'Start_Date', 'Last Login Time':'Last_Login_Time',
+       'Bonus %':'Bonus', 'Senior Management': 'Senior_Management'}, axis=1)
+df.columns
+df.rename({'First Name':'First_Name', 'Start Date':'Start_Date', 'Last Login Time':'Last_Login_Time',
+       'Bonus %':'Bouns', 'Senior Management': 'Senior_Management'}, axis=1, inplace=True)
+df.columns
+df
+df.Bouns.round()
+df['Bonus2'] = df.Bouns.round()
+df
+df['random'] = pd.Series(np.random.randint(0,10,1000))
+df
+df2 = df.iloc[:2]
+df2
+df3 = pd.concat((df, df2), axis=0)
+df3
+df3 = pd.concat((df, df2), axis=0, ignore_index=True)
+df3
+df4 = df.drop(['First_Name'], axis=1)
+df4
+df.drop(range(5), axis=0)
+
+
+#DATA TRANSFORMATION
+df = pd.read_csv('C:/Users/ASUS/Downloads/Pandas+Course+Files/Datasets/employees.csv')
+df
+df.Gender.value_counts()
+df.Gender.isna()
+df.Gender.isna().sum()
+pd.Categorical(df.Gender)
+df['Gender2'] = pd.Categorical(df.Gender)
+df.head()
+df.memory_usage()
+import random
+random.choices(['Very Low','Low','Medium','High','Very High'], k=1000)
+df['Score'] = pd.Series(random.choices(['Very Low','Low','Medium','High','Very High'], k=1000))
+df
+df.dtypes
+pd.Categorical(df.Score)
+pd.Categorical(df.Score,categories=['Very Low','Low','Medium','High','Very High'], ordered=True)
+df.Score2 > 'Medium'
+sum(df.Score2 > 'Medium')
+df.head()
+df.Salary.min()
+df.Salary.max()
+pd.cut(df.Salary, bins=[35000, 50000, 75000, 100000, 125000, 150000], labels=['Very Low','Low','Medium','High','Very High'])
+df
+df.memory_usage()
 
 
 
