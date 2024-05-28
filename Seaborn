@@ -1,0 +1,79 @@
+#Seaborn is an external Python data visualization library, which is based on Matplotlib.
+
+#SETUP
+import numpy as np
+import pandas as pd
+import matplotlib as plt
+import seaborn as sns
+
+%matplotlib inline
+%reload_ext autoreload
+%autoreload 2 
+
+
+#DATASETS
+sns.get_dataset_names()
+tips = sns.load_dataset('tips')
+iris = sns.load_dataset('iris')
+titanic = sns.load_dataset('titanic')
+planets = sns.load_datset('planets')
+tips
+
+
+#SCATTERPLOT
+sns.scatterplot(x='tip', y='total_bill', data=tips, hue='day', size='size', palette='YlGnBu')
+
+
+#HISTOGRAM
+sns.histplot(tips['tip'], kde=True, bins=15)
+sns.histplot(tips['tip'], bins=15)  #without the density line
+sns.distplot(tips['tip'], kde=True, bins=10)
+
+
+#BARPLOTS
+sns.barplot(x='sex', y='tip', data=tips, palette='YlGnBu')
+sns.barplot(x='day', y='tip', data=tips, hue='sex', palette='YlGnBu')
+
+
+#BOXPLOTS AND STRIPPLOTS
+sns.boxplot(x='day', y='tip', data=tips, hue='sex', palette='YlGnBu')
+sns.boxplot(x='day', y='total_bill', data=tips, hue='sex', palette='YlGnBu')
+sns.stripplot(x='day', y='tip', data=tips, hue='sex', palette='YlGnBu')
+sns.stripplot(x='day', y='tip', data=tips, hue='sex', palette='YlGnBu', dodge=True)
+
+#JOINTPLOT
+sns.jointplot(x='tip', y='total_bill', data=tips)
+sns.jointplot(x='tip', y='total_bill', data=tips, kind='reg')
+sns.jointplot(x='tip', y='total_bill', data=tips, kind='kde')
+sns.jointplot(x='tip', y='total_bill', data=tips, kind='kde', shade=True)
+sns.jointplot(x='tip', y='total_bill', data=tips, kind='kde', shade=True, cmap='YlGnBu')
+sns.jointplot(x='tip', y='total_bill', data=tips, kind='hex', cmap='YlGnBu')
+
+#PAIRPLOT
+titanic
+sns.pairplot(titanic.select_dtypes(['number']), hue='pclass')
+
+
+#HEATMAPS
+data = np.random.randint(low=1, high=100, size=(10,10))
+print(data)
+sns.heatmap(data = data)
+sns.heatmap(data = data, cmap='spring')
+sns.heatmap(data = data, cmap='GnBu')
+sns.heatmap(data = data, cmap='GnBu', alpha=0.5)
+sns.heatmap(data = data, linecolor='yellow', linewidth='2')
+sns.heatmap(data = data, annot=True)
+sns.heatmap(data = data, cbar=False)
+sns.heatmap(data = data, xticklabels=False, yticklabels=False)
+
+
+#CLUSTERMAPS
+iris
+sns.clustermap(iris.drop('species', axis=1))
+
+
+
+
+
+
+
