@@ -1,0 +1,67 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv("C:/Users/ASUS/Downloads/world_population.csv")
+df
+pd.set_option('display.float_format', lambda x: '%2f' % x)
+df
+df.info()
+df.describe()
+df.isnull().sum()  #counting all null values
+df.nunique()  #counting all unique values
+df.sort_values(by='2022 Population').head()  #sorting values
+df.sort_values(by='2022 Population', ascending=False).head()
+df.sort_values(by='World Population Percentage', ascending=False).head()
+df.corr()
+sns.heatmap(df.corr(), annot=True)
+plt.rcParams['figure.figsize']=(20,7)
+plt.show()
+df
+df.groupby('Continent').mean()
+df[df['Continent'].str.contains('Oceania')]
+df.groupby('Continent').mean().sort_values(by='2022 Population', ascending=False)
+df2 = df.groupby('Continent').mean().sort_values(by='2022 Population', ascending=False)
+df2
+df2.plot()
+df2.transpose()
+df3 = df2.transpose()
+df3
+df3.plot()
+df.columns
+df2 = df.groupby('Continent')[['2020 Population', '2015 Population', '2010 Population',
+       '2000 Population', '1990 Population', '1980 Population',
+       '1970 Population']].mean().sort_values(by='2022 Population', ascending=False)
+df2
+df2 = df.groupby('Continent')[df.columns[5:13]].mean().sort_values(by='2022 Population', ascending=False)
+df2
+df.boxplot()
+df.dtypes
+df.select_dtypes(include='number')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
