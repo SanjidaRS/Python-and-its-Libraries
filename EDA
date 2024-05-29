@@ -12,15 +12,15 @@ df.nunique()  #counting all unique values
 df.sort_values(by='2022 Population').head()  #sorting values
 df.sort_values(by='2022 Population', ascending=False).head()
 df.sort_values(by='World Population Percentage', ascending=False).head()
-df.corr()
-sns.heatmap(df.corr(), annot=True)
+df.corr(numeric_only=True)
+sns.heatmap(df.corr(numeric_only=True), annot=True)
 plt.rcParams['figure.figsize']=(20,7)
 plt.show()
 df
-df.groupby('Continent').mean()
+df.groupby('Continent').mean(numeric_only=True)
 df[df['Continent'].str.contains('Oceania')]
-df.groupby('Continent').mean().sort_values(by='2022 Population', ascending=False)
-df2 = df.groupby('Continent').mean().sort_values(by='2022 Population', ascending=False)
+df.groupby('Continent').mean(numeric_only=True).sort_values(by='2022 Population', ascending=False)
+df2 = df.groupby('Continent').mean(numeric_only=True).sort_values(by='2022 Population', ascending=False)
 df2
 df2.plot()
 df2.transpose()
@@ -30,13 +30,65 @@ df3.plot()
 df.columns
 df2 = df.groupby('Continent')[['2020 Population', '2015 Population', '2010 Population',
        '2000 Population', '1990 Population', '1980 Population',
-       '1970 Population']].mean().sort_values(by='2022 Population', ascending=False)
+       '1970 Population']].mean(numeric_only=True).sort_values(by='2022 Population', ascending=False)
 df2
 df2 = df.groupby('Continent')[df.columns[5:13]].mean().sort_values(by='2022 Population', ascending=False)
 df2
 df.boxplot()
 df.dtypes
 df.select_dtypes(include='number')
+
+
+
+
+#CLEANING DATA
+import pandas as pd
+df = pd.read_excel("C:/Users/ASUS/Downloads/Customer Call List.xlsx")
+df
+df.drop_duplicates()
+df = df.drop_duplicates()
+df
+df.drop(columns = 'Not_Useful_Column')
+df= df.drop(columns = 'Not_Useful_Column')
+df
+df['Last_Name'].str.strip()
+df['Last_Name'].str.lstrip('...') #to remove '...' from the left side of the column
+df['Last_Name'].str.lstrip('/')
+df['Last_Name'] = df['Last_Name'].str.lstrip('...')
+df
+df['Last_Name'] = df['Last_Name'].str.lstrip('...')
+df['Last_Name'] = df['Last_Name'].str.lstrip('/')
+df['Last_Name'] = df['Last_Name'].str.rstrip('_')
+df
+df['Last_Name'].str.rstrip('123._/') #for cleaning together
+df['Last_Name'] = df['Last_Name'].str.rstrip('123._/')
+df
+df['Phone_Number'] = df['Phone_Number'].str.replace('[^a-zA-Z0-9]', '', regex=True).replace({'N/a': pd.NA, 'Na': pd.NA})
+df['Phone_Number'] 
+df['Phone_Number'].apply(lambda x: str(x))
+df['Phone_Number'] = df['Phone_Number'].apply(lambda x: str(x))
+df['Phone_Number'] = df['Phone_Number'].apply(lambda x: x[0:3]+ '-'+ x[3:6]+ '-' + x[6:10])
+df
+df['Phone_Number'] = df['Phone_Number'].str.replace('nan--', '')
+df
+df['Address'].str.split(',', n=2, expand=True)
+df[['Street Address', 'State', 'Zip']] = df['Address'].str.split(',', n=2, expand=True)
+df
+df['Paying Customer'] = df['Paying Customer'].str.replace('Yes','Y')
+df['Paying Customer'] = df['Paying Customer'].str.replace('No','N')
+df
+df['Do_Not_Contact'] = df['Do_Not_Contact'].str.replace('Yes','Y')
+df['Do_Not_Contact'] = df['Do_Not_Contact'].str.replace('No','N')
+df
+df.replace('N/a', '')
+df.fillna()
+for x in df.index:
+    if df.loc[x, 'Do_Not_Contact']=='Y':
+        df.drop(x, inplace=True)
+df
+
+
+
 
 
 
